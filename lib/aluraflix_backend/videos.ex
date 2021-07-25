@@ -11,6 +11,10 @@ defmodule AluraflixBackend.Videos do
     end
   end
 
+  def get_videos() do
+    Repo.all(Video)
+  end
+
   def create_video(params) do
     params
     |> Video.changeset()
