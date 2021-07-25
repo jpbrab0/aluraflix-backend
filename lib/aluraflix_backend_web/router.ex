@@ -7,6 +7,10 @@ defmodule AluraflixBackendWeb.Router do
 
   scope "/api", AluraflixBackendWeb do
     pipe_through :api
+
+    get "/videos/:id", VideoController, :get_video_by_id
+    get "/videos", VideoController, :get_all_videos
+    post "/videos", VideoController, :create_new_video
   end
 
   # Enables LiveDashboard only for development
