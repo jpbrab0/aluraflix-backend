@@ -20,4 +20,15 @@ defmodule AluraflixBackend.Videos do
     |> Video.changeset()
     |> Repo.insert()
   end
+
+  def update_video(id, params) do
+    video = get_video(id)
+
+    updated_video = Ecto.Changeset.change(video, params)
+
+    case Repo.update updated_video do
+      {:ok, result} -> {:ok, result}
+      {:error, reason} -> {:error, reason}
+    end
+  end
 end
