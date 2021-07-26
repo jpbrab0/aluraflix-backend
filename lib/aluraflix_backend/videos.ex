@@ -21,14 +21,29 @@ defmodule AluraflixBackend.Videos do
     |> Repo.insert()
   end
 
-  def update_video(id, params) do
+  def edit_video(id, params) do
     video = get_video(id)
 
-    updated_video = Ecto.Changeset.change(video, params)
+    updated_video =
+      video
+      |> Video.changeset(params)
+      |> Repo.update!()
 
-    case Repo.update updated_video do
+    case updated_video do
       {:ok, result} -> {:ok, result}
-      {:error, reason} -> {:error, reason}
+
+      _ ->
+        {:error, "Ocurred an error on edit the video"}
     end
+
+  end
+
+  def remove_video(id) do
+    video = get_video(id)
+
+    video
+    |> Repo.delete!()
+
+    {:ok, "The video has been deleted."}
   end
 end
