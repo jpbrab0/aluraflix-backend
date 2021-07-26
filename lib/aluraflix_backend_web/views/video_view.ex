@@ -15,15 +15,4 @@ defmodule AluraflixBackendWeb.VideoView do
       }
     }
   end
-
-  def render("created_video.json", %{video: video}) do
-    %{
-      video: %{
-        id: video.id,
-        titulo: video.titulo,
-        descricao: video.descricao,
-        url: video.url
-      }
-    }
-  end
 end
