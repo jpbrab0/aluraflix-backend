@@ -11,6 +11,8 @@ defmodule AluraflixBackendWeb.Router do
     get "/videos/:id", VideoController, :get_video_by_id
     get "/videos", VideoController, :get_all_videos
     post "/videos", VideoController, :create_new_video
+    put "/videos/:id", VideoController, :update_video_by_id
+    delete "/videos/:id", VideoController, :delete_video_by_id
   end
 
   # Enables LiveDashboard only for development
