@@ -3,12 +3,12 @@ defmodule AluraflixBackend.Videos.Schemas.Video do
 
   import Ecto.Changeset
 
-  @required [:titulo, :descricao, :url]
+  @required [:title, :description, :url]
   @optional []
 
   schema "videos" do
-    field :titulo, :string
-    field :descricao, :string
+    field :title, :string
+    field :description, :string
     field :url, :string
 
     timestamps()
