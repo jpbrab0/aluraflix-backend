@@ -3,8 +3,8 @@ defmodule AluraflixBackend.Repo.Migrations.CreateVideosTable do
 
   def change do
     create table(:videos) do
-      add :titulo, :string
-      add :descricao, :string
+      add :title, :string
+      add :description, :string
       add :url, :string
 
       timestamps()
