@@ -9,8 +9,8 @@ defmodule AluraflixBackendWeb.VideoView do
     %{
       video: %{
         id: video.id,
-        titulo: video.titulo,
-        descricao: video.descricao,
+        title: video.title,
+        description: video.description,
         url: video.url
       }
     }
