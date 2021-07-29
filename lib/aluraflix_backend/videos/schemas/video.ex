@@ -3,6 +3,8 @@ defmodule AluraflixBackend.Videos.Schemas.Video do
 
   import Ecto.Changeset
 
+  alias AluraflixBackend.Categories.Schemas.Category
+
   @required [:title, :description, :url]
   @optional []
 
@@ -10,6 +12,8 @@ defmodule AluraflixBackend.Videos.Schemas.Video do
     field :title, :string
     field :description, :string
     field :url, :string
+
+    has_one :category, Category
 
     timestamps()
   end
