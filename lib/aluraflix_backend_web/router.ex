@@ -8,11 +8,19 @@ defmodule AluraflixBackendWeb.Router do
   scope "/api", AluraflixBackendWeb do
     pipe_through :api
 
+    # Video Routes
     get "/videos/:id", VideoController, :get_video_by_id
     get "/videos", VideoController, :get_all_videos
     post "/videos", VideoController, :create_new_video
     put "/videos/:id", VideoController, :update_video_by_id
     delete "/videos/:id", VideoController, :delete_video_by_id
+
+    # Category Routes
+    get "/categories/:id", CategoryController, :get_category_by_id
+    get "/categories", CategoryController, :get_all_categories
+    post "/categories", CategoryController, :create_new_category
+    put "/categories/:id", CategoryController, :update_category_by_id
+    delete "/categories/:id", CategoryController, :delete_category_by_id
   end
 
   # Enables LiveDashboard only for development
