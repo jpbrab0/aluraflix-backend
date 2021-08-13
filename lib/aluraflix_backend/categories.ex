@@ -1,6 +1,9 @@
 defmodule AluraflixBackend.Categories do
   alias AluraflixBackend.Categories.Schemas.Category
+  alias AluraflixBackend.Videos.Schemas.Video
   alias AluraflixBackend.Repo
+
+  import Ecto.Query
 
   def get_category(category_id) do
     try do
@@ -45,5 +48,14 @@ defmodule AluraflixBackend.Categories do
     |> Repo.delete!()
 
     {:ok, "The category has been deleted."}
+  end
+
+  def get_all_videos_of_a_category(id) do
+    total_count_category_videos = Repo.one(from v in Video, select: count(v.category_id == ^id))
+
+    query = from(v in Video, where: v.id == ^id, select: v)
+    all_videos_of_the_category = Repo.all(query)
+
+    %{total_videos: total_count_category_videos, videos: [all_videos_of_the_category]}
   end
 end
