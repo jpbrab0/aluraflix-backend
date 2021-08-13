@@ -5,11 +5,12 @@ defmodule AluraflixBackend.Videos.Schemas.Video do
 
   alias AluraflixBackend.Categories.Schemas.Category
 
-  @required [:title, :description, :url]
+  @required [:title, :description, :url, :category_id]
   @optional []
 
   schema "videos" do
     field :title, :string
+    field :category_id, :integer
     field :description, :string
     field :url, :string
 
