@@ -2,6 +2,7 @@ defmodule AluraflixBackendWeb.VideoController do
   use AluraflixBackendWeb, :controller
 
   alias AluraflixBackend.Videos
+  alias AluraflixBackend.Categories
 
   def get_video_by_id(conn, %{"id" => id}) do
     case Videos.get_video(id) do
@@ -12,6 +13,13 @@ defmodule AluraflixBackendWeb.VideoController do
 
       video_data -> render(conn, "video.json", video: video_data)
     end
+  end
+  
+  # Pattern Matching to search a video or return all registered videos
+  def get_all_videos(conn, %{"search" => search_name}) do 
+    results = search_name |> Videos.search_video_by_name()
+
+    render(conn, "videos.json", videos: results)
   end
 
   def get_all_videos(conn, _) do
@@ -58,5 +66,11 @@ defmodule AluraflixBackendWeb.VideoController do
     conn
     |> put_status(:ok)
     |> json(%{message: message})
+  end
+
+  def get_videos_by_category(conn, %{"id" => id}) do
+    video_data = Videos.get_all_videos_of_a_category(id)
+
+    render(conn, "videosbycategory.json", video_data: video_data)
   end
 end
