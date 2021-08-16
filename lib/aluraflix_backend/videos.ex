@@ -2,6 +2,8 @@ defmodule AluraflixBackend.Videos do
   alias AluraflixBackend.Videos.Schemas.Video
   alias AluraflixBackend.Repo
 
+  import Ecto.Query
+
   def get_video(video_id) do
     try do
       Repo.get!(Video, video_id)
@@ -45,5 +47,24 @@ defmodule AluraflixBackend.Videos do
     |> Repo.delete!()
 
     {:ok, "The video has been deleted."}
+  end
+
+  def search_video_by_name(name_video) do
+    like = "%#{name_video}%"
+    query = from(v in Video, where: like(v.title, ^like), select: v)
+
+    results = Repo.all(query)
+
+    results
+  end
+
+  def get_all_videos_of_a_category(id) do
+    id = id |> String.to_integer()
+    total_count_category_videos = Repo.one(from v in Video, select: count(v.category_id == ^id))
+
+    query = from(v in Video, where: v.category_id == ^id, select: v)
+    all_videos_of_the_category = Repo.all(query)
+
+    %{total_videos: total_count_category_videos, videos: all_videos_of_the_category}
   end
 end
