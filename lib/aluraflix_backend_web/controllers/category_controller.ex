@@ -10,12 +10,14 @@ defmodule AluraflixBackendWeb.CategoryController do
         |> put_status(:not_found)
         |> json(%{message: reason})
 
-      category_data -> render(conn, "category.json", category: category_data)
+      category_data ->
+        render(conn, "category.json", category: category_data)
     end
   end
 
   def get_all_categories(conn, _) do
     categories = Categories.get_categories()
+
     case categories do
       Ecto.NoResultsError ->
         conn
@@ -29,7 +31,8 @@ defmodule AluraflixBackendWeb.CategoryController do
 
   def create_new_category(conn, params) do
     case Categories.create_category(params) do
-      {:ok, category_data} -> render(conn, "category.json", category: category_data)
+      {:ok, category_data} ->
+        render(conn, "category.json", category: category_data)
 
       {:error, _reason} ->
         put_status(conn, :not_found)
@@ -43,7 +46,8 @@ defmodule AluraflixBackendWeb.CategoryController do
     params = params |> Map.drop(["id"])
 
     case Categories.edit_category(id, params) do
-      {:ok, updated_category_data} -> render(conn, "category.json", category: updated_category_data)
+      {:ok, updated_category_data} ->
+        render(conn, "category.json", category: updated_category_data)
 
       {:error, reason} ->
         conn
