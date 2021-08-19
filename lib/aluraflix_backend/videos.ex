@@ -32,12 +32,12 @@ defmodule AluraflixBackend.Videos do
       |> Repo.update!()
 
     case updated_video do
-      {:ok, result} -> {:ok, result}
+      {:ok, result} ->
+        {:ok, result}
 
       _ ->
         {:error, "Ocurred an error on edit the video"}
     end
-
   end
 
   def remove_video(id) do
