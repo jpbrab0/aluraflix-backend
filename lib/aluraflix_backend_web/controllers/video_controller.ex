@@ -2,7 +2,6 @@ defmodule AluraflixBackendWeb.VideoController do
   use AluraflixBackendWeb, :controller
 
   alias AluraflixBackend.Videos
-  alias AluraflixBackend.Categories
 
   def get_video_by_id(conn, %{"id" => id}) do
     case Videos.get_video(id) do
@@ -11,12 +10,13 @@ defmodule AluraflixBackendWeb.VideoController do
         |> put_status(:not_found)
         |> json(%{message: reason})
 
-      video_data -> render(conn, "video.json", video: video_data)
+      video_data ->
+        render(conn, "video.json", video: video_data)
     end
   end
-  
+
   # Pattern Matching to search a video or return all registered videos
-  def get_all_videos(conn, %{"search" => search_name}) do 
+  def get_all_videos(conn, %{"search" => search_name}) do
     results = search_name |> Videos.search_video_by_name()
 
     render(conn, "videos.json", videos: results)
@@ -24,6 +24,7 @@ defmodule AluraflixBackendWeb.VideoController do
 
   def get_all_videos(conn, _) do
     videos = Videos.get_videos()
+
     case videos do
       Ecto.NoResultsError ->
         conn
@@ -37,7 +38,8 @@ defmodule AluraflixBackendWeb.VideoController do
 
   def create_new_video(conn, params) do
     case Videos.create_video(params) do
-      {:ok, video_data} -> render(conn, "video.json", video: video_data)
+      {:ok, video_data} ->
+        render(conn, "video.json", video: video_data)
 
       {:error, _reason} ->
         put_status(conn, :not_found)
@@ -51,7 +53,8 @@ defmodule AluraflixBackendWeb.VideoController do
     params = params |> Map.drop(["id"])
 
     case Videos.edit_video(id, params) do
-      {:ok, updated_video_data} -> render(conn, "video.json", video: updated_video_data)
+      {:ok, updated_video_data} ->
+        render(conn, "video.json", video: updated_video_data)
 
       {:error, reason} ->
         conn
