@@ -7,11 +7,9 @@ defmodule AluraflixBackendWeb.CategoryView do
 
   def render("category.json", %{category: category}) do
     %{
-      video: %{
-        id: category.id,
-        title: category.title,
-        color: category.color
-      }
+      id: category.id,
+      title: category.title,
+      color: category.color
     }
   end
 end
