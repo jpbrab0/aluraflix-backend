@@ -11,7 +11,7 @@ use Mix.Config
 # before starting your production server.
 config :aluraflix_backend, AluraflixBackendWeb.Endpoint,
   http: [port: {:system, "PORT"}]
-  url: [scheme: "https", host: "aluraflix-backend-elixir.herokuapp.com/", port: 443],
+  url: [scheme: "https", host: "aluraflix-backend-elixir.herokuapp.com", port: 443],
   force_ssl: [rewrite_on: [:x_fowarded_proto]],
   cache_static_manifest: "priv/static/cache_manifest.json",
   secret_key_base: System.get_ent("SECRET_KEY_BASE")
