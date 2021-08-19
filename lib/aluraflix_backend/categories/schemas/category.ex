@@ -3,16 +3,12 @@ defmodule AluraflixBackend.Categories.Schemas.Category do
 
   import Ecto.Changeset
 
-  alias AluraflixBackend.Videos.Schemas.Video
-
   @required [:title, :color]
   @optional []
 
   schema "categories" do
     field :title, :string
     field :color, :string
-
-    belongs_to :video, Video
 
     timestamps()
   end
