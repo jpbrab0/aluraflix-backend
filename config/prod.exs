@@ -10,8 +10,17 @@ use Mix.Config
 # which you should run after static files are built and
 # before starting your production server.
 config :aluraflix_backend, AluraflixBackendWeb.Endpoint,
-  url: [host: "example.com", port: 80],
-  cache_static_manifest: "priv/static/cache_manifest.json"
+  http: [port: {:system, "PORT"}]
+  url: [scheme: "https", host: "aluraflix-backend-elixir.herokuapp.com/", port: 443],
+  force_ssl: [rewrite_on: [:x_fowarded_proto]],
+  cache_static_manifest: "priv/static/cache_manifest.json",
+  secret_key_base: System.get_ent("SECRET_KEY_BASE")
+
+config :aluraflix_backend, AluraBackendWeb.Repo,
+  adapter: Ecto.Adapter.Postgres,
+  url: System.get_env("DATABASE_URL"),
+  pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10"),
+  ssl: true
 
 # Do not print debug messages in production
 config :logger, level: :info
