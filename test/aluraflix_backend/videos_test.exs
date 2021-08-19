@@ -6,7 +6,13 @@ defmodule AluraflixBackend.VideosTest do
   describe "get_video/1" do
     test "Get an video by id" do
       # Creating video for later, get this video by id
-      {:ok, create_video_result} = Videos.create_video(%{titulo: "lalala teste brabooo", descricao: "teste fodaaaaaaaaaaaaaaaa", url: "https://muitofoda.com.br"})
+      {:ok, create_video_result} =
+        Videos.create_video(%{
+          title: "teste",
+          category_id: 1,
+          description: "teste description",
+          url: "https://teste.com.br"
+        })
 
       get_video_result = Videos.get_video(create_video_result.id)
 
@@ -16,9 +22,54 @@ defmodule AluraflixBackend.VideosTest do
 
   describe "create_video/1" do
     test "Create a video" do
-      result = Videos.create_video(%{titulo: "lalala teste brabooo", descricao: "teste fodaaaaaaaaaaaaaaaa", url: "https://muitofoda.com.br"})
+      {:ok, result} =
+        Videos.create_video(%{
+          title: "teste",
+          category_id: 1,
+          description: "teste description",
+          url: "https://teste.com.br"
+        })
 
-      assert result != Ecto.QueryError
+      assert %{
+               title: result.title,
+               category_id: result.category_id,
+               description: result.description,
+               url: result.url
+             } == %{
+               title: "teste",
+               category_id: 1,
+               description: "teste description",
+               url: "https://teste.com.br"
+             }
     end
   end
+
+  # Depois eu termino os testes valeu falou
+
+  # describe "edit_video/2" do
+  #   test "Create a video and edit him" do
+  #     {:ok, video} =
+  #       Videos.create_video(%{
+  #         title: "teste",
+  #         category_id: 1,
+  #         description: "teste description",
+  #         url: "https://teste.com.br"
+  #       })
+
+  #     {:ok, video_edited} =
+  #       Videos.edit_video(video.id, %{
+  #         title: "teste editado",
+  #         category_id: 1,
+  #         description: "descrição atualizada",
+  #         url: "https://atualizada.com.br"
+  #       })
+
+  #     assert video_edited == %{
+  #              title: "teste editado",
+  #              category_id: 1,
+  #              description: "descrição atualizada",
+  #              url: "https://atualizada.com.br"
+  #            }
+  #   end
+  # end
 end
