@@ -1,5 +1,7 @@
 # AluraflixBackend
 
+[![Elixir CI](https://github.com/jpbrab0/aluraflix-backend/actions/workflows/elixir.yml/badge.svg)](https://github.com/jpbrab0/aluraflix-backend/actions/workflows/elixir.yml)
+
 ## About the project 📜
 
 This is a challenge from [Alura Backend Challenges](https://github.com/alura-challenges/challenge-back-end) where all the participants builed the backend of [AluraFlix](https://github.com/imersao-alura/aluraflix).
