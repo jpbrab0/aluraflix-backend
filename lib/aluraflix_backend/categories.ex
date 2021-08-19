@@ -1,9 +1,6 @@
 defmodule AluraflixBackend.Categories do
   alias AluraflixBackend.Categories.Schemas.Category
-  alias AluraflixBackend.Videos.Schemas.Video
   alias AluraflixBackend.Repo
-
-  import Ecto.Query
 
   def get_category(category_id) do
     try do
@@ -33,12 +30,12 @@ defmodule AluraflixBackend.Categories do
       |> Repo.update!()
 
     case updated_category do
-      {:ok, result} -> {:ok, result}
+      {:ok, result} ->
+        {:ok, result}
 
       _ ->
         {:error, "Ocurred an error on edit the category"}
     end
-
   end
 
   def remove_category(id) do
