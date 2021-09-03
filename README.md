@@ -17,6 +17,7 @@ And is builded with:
 Requirements:
   * [Elixir](https://elixir-lang.org/install.html)
   * Erlang
+  * [Docker](https://www.docker.com/get-started)
   * [Docker-compose](https://docs.docker.com/compose/install/)
 
 Clone the github repo to your local machine
@@ -40,10 +41,29 @@ gh repo clone jpbrab0/aluraflix-backend
 To start your Phoenix server:
 
   * Install dependencies with `mix deps.get`
+  * Initialize the postgres with `docker-compose -f docker-compose.database.yml up -d`
   * Create and migrate your database with `mix ecto.setup`
-  * Start Phoenix endpoint with `mix phx.server`
+  * Start Phoenix endpoint with `HOSTNAME=localhost mix phx.server`
 
 Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
+
+## Running the project with Docker! 🐳
+### Build image
+```bash
+docker-compose build
+```
+
+### Create and migrate database
+```bash
+docker-compose run app mix ecto.setup
+```
+
+### Run project(if you dont want do see logs add -d)
+```bash
+docker-compose up
+```
+
+Now you can acess the project in  [`localhost:8000`](http://localhost:8000) :)
 
 # Testing 🧪
 
